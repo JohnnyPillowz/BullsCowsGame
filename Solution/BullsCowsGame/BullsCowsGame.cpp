@@ -7,19 +7,34 @@ void PrintIntro();
 void PlayGame();
 string GetGuess();
 string PrintBack();
-
+bool AskToPlayAgain();
 
 //entry point
 int main()
 {
-	PrintIntro();
+	bool bPlayAgain = false;
+	do 
+	{
+		PrintIntro();
 
-	PlayGame();
+		PlayGame();
 
-	
+		bPlayAgain = AskToPlayAgain();
+	} 
+	while (bPlayAgain);
+
 	return 0;
 }
 
+//scripts
+void PrintIntro() {
+	// introduce the game 
+	constexpr int WORD_LENGTH = 5;
+	cout << "Eluwina Byczki i Krufki! *u*\n";
+	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of? UwU\n";
+	cout << endl;
+	return;
+}
 void PlayGame()
 {
 	//loop for the number of turns
@@ -31,7 +46,6 @@ void PlayGame()
 		cout << endl;
 	}
 }
-
 string GetGuess() 
 {
 	// get a guess from player
@@ -41,7 +55,6 @@ string GetGuess()
 	return Guess;
 
 }
-
 string PrintBack()
 {
 	// repeat the guess back 
@@ -49,12 +62,10 @@ string PrintBack()
 	cout << "Your guess was: " << Guess << endl;
 	return Guess;
 }
-
-void PrintIntro() {
-	// introduce the game 
-	constexpr int WORD_LENGTH = 5;
-	cout << "Eluwina Byczki i Krufki! *u*\n";
-	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of? UwU\n";
-	cout << endl;
-	return;
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again? UwU\n";
+	string Response = "";
+	getline(cin, Response);
+	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
